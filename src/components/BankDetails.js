@@ -28,7 +28,7 @@ const BankDetails = () => {
   };
 
   return (
-    <div className="p-4 mt-4 bg-white shadow-md rounded-lg border border-gray-300 max-w-lg mx-auto">
+    <div className="p-4 mt-4 bg-white shadow-md rounded-lg border border-gray-300 w-full max-w-lg mx-auto md:ml-8">
       {isEditMode ? (
         <>
           <h2 className="text-2xl font-bold mb-4">Update Bank Details</h2>

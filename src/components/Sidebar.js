@@ -7,7 +7,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import BankIcon from '@mui/icons-material/AccountBalance';
 
 const Sidebar = ({ activeSection, setActiveSection, collapsed, handleCollapseToggle }) => {
-  const drawerClasses = `transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'}`;
+  const drawerClasses = `transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'} md:block hidden`;
 
   return (
     <Drawer

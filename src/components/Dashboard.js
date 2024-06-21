@@ -21,13 +21,11 @@ const Dashboard = () => {
           collapsed={collapsed}
           handleCollapseToggle={handleCollapseToggle}
         />
-        <main className={`flex-grow p-4 transition-all duration-300 ${collapsed ? 'ml-20' : 'ml-64'}`}>
-          <div className="w-full max-w-2xl mx-auto ml-8">  {/* Adjust ml-8 to shift to the right */}
-            {activeSection === 'Bank Details' && <BankDetails />}
-            {activeSection !== 'Bank Details' && (
-              <div className="p-4 text-gray-500">Section not implemented.</div>
-            )}
-          </div>
+        <main className={`flex-grow p-4 transition-all duration-300 ${collapsed ? 'ml-20' : 'ml-64'} md:ml-0`}>
+          {activeSection === 'Bank Details' && <BankDetails />}
+          {activeSection !== 'Bank Details' && (
+            <div className="p-4 text-gray-500">Section not implemented.</div>
+          )}
         </main>
       </div>
     </div>
