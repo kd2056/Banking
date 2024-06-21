@@ -1,34 +1,47 @@
-import React, { useState } from 'react';
-//importing buttons from material ui 
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import React from 'react';
+import { Drawer, IconButton, List, ListItem, ListItemText, ListItemIcon } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import GridViewIcon from '@mui/icons-material/GridView';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import LinkIcon from '@mui/icons-material/Link';
-import SummarizeIcon from '@mui/icons-material/Summarize';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import DescriptionIcon from '@mui/icons-material/Description';
+import BankIcon from '@mui/icons-material/AccountBalance';
 
-const Sidebar = ({ setActiveSection }) => {
-  const [isOpen, setIsOpen] = useState(false); //initially sidebar is closed
+const Sidebar = ({ activeSection, setActiveSection, collapsed, handleCollapseToggle }) => {
+  const drawerClasses = `transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'}`;
 
   return (
-    <div className={`flex flex-col ${isOpen ? 'w-64' : 'w-12'} bg-gray-800 text-white h-full transition-width duration-300`}>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="p-4 focus:outline-none"
-      >
-        {isOpen ? <ArrowBackIcon/> : <ArrowForwardIcon/>}
-      </button>
-      {/* //Sidebar will appear only when ArrowForwardIcon is clicked */}
-      {isOpen && (
-  <nav className="mt-4">
-    <a href="#" onClick={() => setActiveSection('My Dashboard')} className="block py-2 px-4 hover:bg-gray-700"><GridViewIcon/> My Dashboard</a>
-    <a href="#" onClick={() => setActiveSection('TOTM links')} className="block py-2 px-4 hover:bg-gray-700"><LinkIcon/> TOTM links</a>
-    <a href="#" onClick={() => setActiveSection('Daily Summary')} className="block py-2 px-4 hover:bg-gray-700"><SummarizeIcon/> Daily Summary</a>
-    <a href="#" onClick={() => setActiveSection('Bank Details')} className="block py-2 px-4 hover:bg-gray-700"><AccountBalanceIcon/> Bank Details</a>
-  </nav>
-)}
-
-    </div>
+    <Drawer
+      variant="persistent"
+      open={true}
+      className={`h-full flex-shrink-0 ${drawerClasses} z-10`}
+      classes={{
+        paper: drawerClasses,
+      }}
+    >
+      <div className="flex justify-between items-center px-4 py-2">
+        <IconButton onClick={handleCollapseToggle} className="mt-4">
+          <ArrowBackIcon className="text-black" />
+        </IconButton>
+      </div>
+      <List>
+        <ListItem button selected={activeSection === 'Dashboard'} onClick={() => setActiveSection('Dashboard')}>
+          <ListItemIcon><DashboardIcon className="text-black" /></ListItemIcon>
+          {!collapsed && <ListItemText primary="My Dashboard" />}
+        </ListItem>
+        <ListItem button selected={activeSection === 'TOTM links'} onClick={() => setActiveSection('TOTM links')}>
+          <ListItemIcon><LinkIcon className="text-black" /></ListItemIcon>
+          {!collapsed && <ListItemText primary="TOTM links" />}
+        </ListItem>
+        <ListItem button selected={activeSection === 'Daily Summary'} onClick={() => setActiveSection('Daily Summary')}>
+          <ListItemIcon><DescriptionIcon className="text-black" /></ListItemIcon>
+          {!collapsed && <ListItemText primary="Daily Summary" />}
+        </ListItem>
+        <ListItem button selected={activeSection === 'Bank Details'} onClick={() => setActiveSection('Bank Details')}>
+          <ListItemIcon><BankIcon className="text-black" /></ListItemIcon>
+          {!collapsed && <ListItemText primary="Bank Details" />}
+        </ListItem>
+      </List>
+    </Drawer>
   );
 };
 
